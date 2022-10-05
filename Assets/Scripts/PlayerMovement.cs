@@ -11,7 +11,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb; 
     public PlayableDirector director;
     private Animator anim;
- 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("correr", false);
         }
-        else
+        else 
         {
             anim.SetBool("correr", true);
         }
