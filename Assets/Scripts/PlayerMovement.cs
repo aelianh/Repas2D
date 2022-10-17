@@ -5,13 +5,14 @@ using UnityEngine.Playables;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5; 
+    public float speed = 5;
+    public float jumpForce = 5;
     private float horizontal;
     private Transform playerTransform;
     private Rigidbody2D rb; 
     public PlayableDirector director;
-    private Animator anim;
-
+    public Animator anim;
+    public bool isGrounded;
 
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate() 
     {
-        rb.velocity = new Vector2 (horizontal , 0f)* speed; 
+        rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y); 
 
     }
     
@@ -36,15 +37,26 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("correr", false);
         }
-        else 
+        if (horizontal == 1)
         {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             anim.SetBool("correr", true);
         }
-        
+        if (horizontal == -1)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            anim.SetBool("correr", true);
+        }
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            anim.SetBool("Salto", true);
+        }
         // playerTransform.position += new Vector3 (1, 0, 0)* horizontal * speed * Time.deltaTime;
         //playerTransform.position += new Vector3 (horizontal * speed * Time.deltaTime, 0, 0);
         //playerTransform.Translate(Vector3.right * horizontal * speed * Time.deltaTime, Space.World);
-        
+
     }
     void OnTriggerEnter2D(Collider2D other) 
     {   
