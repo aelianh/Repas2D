@@ -64,6 +64,13 @@ public class PlayerMovement : MonoBehaviour
         {
             director.Play(); 
         }
+        if(other.gameObject.tag == "Bomba")
+        {
+            //GameManager.Instance.RestarVidas();
+            Destroy(other.gameObject);
+            StartCoroutine(GameObject.Find("Main Camera").GetComponent<CameraShake>().Shake(1F, 0.05F));
+           
+        }
         
     }
 }   
