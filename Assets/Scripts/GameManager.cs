@@ -5,10 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public GameObject PantallaFinal;
+    public GameObject Personaje;
 
-    public int vidas = 3;
-
-    public int puntos = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -29,7 +28,15 @@ public class GameManager : MonoBehaviour
 
     public void RestarVidas()
     {
-        vidas--;
+        Global.vidas--;
+        AudioManager.Instance.SonidoImpacto();
+        if(Global.vidas == 0)
+        {
+            Debug.Log("onichan uwu");
+            PantallaFinal.SetActive(true);
+            Personaje.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
