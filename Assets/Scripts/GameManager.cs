@@ -6,12 +6,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject PantallaFinal;
+    public GameObject PantallaVictoria;
     public GameObject Personaje;
-
+    public GameObject[] Vidas;
+    
 
     // Start is called before the first frame update
     void Awake()
     {
+        
         //Si ya hay una instancia y no soy yo me destruyo
         if(Instance != null && Instance != this)
         {
@@ -28,13 +31,36 @@ public class GameManager : MonoBehaviour
 
     public void RestarVidas()
     {
-        Global.vidas--;
+        
         AudioManager.Instance.SonidoImpacto();
-        if(Global.vidas == 0)
+
+       
+        if(Global.vidas == 1)
         {
-            Debug.Log("onichan uwu");
+            Vidas[0].SetActive(false);
             PantallaFinal.SetActive(true);
             Personaje.SetActive(false);
+        }
+        else if(Global.vidas == 2)
+        {
+            Vidas[1].SetActive(false);
+        }
+        else if(Global.vidas == 3)
+        {
+            Vidas[2].SetActive(false);
+        }
+        Global.vidas--;
+
+    }
+     public void SumarPuntos()
+    {
+        Global.estrellas ++;
+        AudioManager.Instance.SonidoEstrella();
+        if(Global.estrellas == 3)
+        {
+            Debug.Log("onichan o///o");
+            PantallaVictoria.SetActive(true);
+            
         }
 
     }

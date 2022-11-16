@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayableDirector director;
     public Animator anim;
     public bool isGrounded;
+    public BoxCollider2D c2D;
 
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         playerTransform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        c2D = GetComponent<BoxCollider2D>();
     }
     void FixedUpdate() 
     {
@@ -66,10 +68,20 @@ public class PlayerMovement : MonoBehaviour
         }
         if(other.gameObject.tag == "Bomba")
         {
+            other.GetComponent<BoxCollider2D>().enabled = false;
             GameManager.Instance.RestarVidas();
-            Destroy(other.gameObject);
+
             StartCoroutine(GameObject.Find("Main Camera").GetComponent<CameraShake>().Shake(1F, 0.05F));
-           
+            other.GetComponent<Animator>().SetTrigger("contacto");
+
+            Destroy(other.gameObject, 1f);
+            
+
+        }
+        if(other.gameObject.tag == "Estrella")
+        {
+            GameManager.Instance.SumarPuntos();
+            Destroy(other.gameObject);
         }
         
     }
