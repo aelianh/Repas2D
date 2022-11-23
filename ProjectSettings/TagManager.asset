@@ -7,11 +7,13 @@ TagManager:
   - Cinematica
   - Bomba
   - Estrella
+  - Star
+  - Moneda
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Bomba

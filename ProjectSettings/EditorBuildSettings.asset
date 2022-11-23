@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/RepasExamen.unity
+    guid: 6ec9991a305506f4c847e683c7b0a836
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: ae5a5508aba9eb348be0a5ebcca96d15
   m_configObjects: {}
